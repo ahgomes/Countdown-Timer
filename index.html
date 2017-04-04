@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head> <link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet"> <title>Loading...</title></head><body>
+<html><head><link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet"> <title>Loading...</title></head><body>
     <style media="screen">
         * {
             margin: 0;
@@ -127,8 +127,9 @@
         var eoptime;
         var date;
         var x;
+        var title = document.querySelector('title');
 
-        window.load = wDay(0);
+        window.load = dayStarted() ? wDay(0) : title.innerHTML = 'School isn\'t open rn';
         document.querySelector('.btnB').onclick = function(){
             clearInterval(x);
             if(dayStarted()) {
@@ -234,16 +235,16 @@
                 //document.querySelector('.jz').style.width = ptl + 'px';
 
                 if(eoptime == null && h > 12) {
-                    document.querySelector('title').innerHTML = 'School is Over';
+                    title.innerHTML = 'School is Over';
                 } else if(eoptime == null && h < 12) {
-                    document.querySelector('title').innerHTML = 'School hasn\'t started';
+                    title.innerHTML = 'School hasn\'t started';
                 } else {
-                    document.querySelector('title').innerHTML = tabString;
+                    title.innerHTML = tabString;
                 }
 
                 if (timeLeft.min == 0 && timeLeft.sec == 0) {
                     clearInterval(x);
-                    document.querySelector('title').innerHTML = 'BELL ...';
+                    title.innerHTML = 'BELL ...';
                     window.setTimeout(function(){
                         wDay(daytype);
                     }, 240000);

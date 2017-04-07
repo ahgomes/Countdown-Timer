@@ -129,9 +129,9 @@
         var x;
         var title = document.querySelector('title');
 
-        function setCookie(cname,cvalue) {
+        function setCookie(cname,cvalue, exdays) {
             var d = new Date();
-            d.setTime(d.getTime() + (24*60*60*1000));
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
             var expires = 'expires=' + d.toGMTString();
             document.cookie = cname + '=' + cvalue + '; ' + expires;
         }
@@ -151,30 +151,36 @@
 
         function checkCookie() {
             var day = getCookie('dayType');
-            if (day == '') {
+            if (day == null) {
                 return 0;
             } else {
                 return day;
             }
         }
 
+        function eraseCookie(name) {
+            setCookie(name, '', -1);
+        }
+
         window.load = dayStarted() ?  wDay(checkCookie()) : title.innerHTML = 'School isn\'t open rn';
         document.querySelector('.btnB').onclick = function(){
             clearInterval(x);
+            eraseCookie('dayType');
             if(dayStarted()) {
                 notify(0);
+                setCookie('dayType', 0, 1);
                 wDay(0);
-                setCookie('dayType', 0);
             }
             else notify(2);
         };
 
         document.querySelector('.btnE').onclick = function(){
             clearInterval(x);
+            eraseCookie('dayType');
             if(dayStarted()) {
                 notify(1);
+                setCookie('dayType', 1, 1);
                 wDay(1);
-                setCookie('dayType', 1);
             }
             else notify(2);
         };

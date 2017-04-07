@@ -151,10 +151,10 @@
 
         function checkCookie() {
             var day = getCookie('dayType');
-            if (day == null) {
+            if (day == '') {
                 return 0;
             } else {
-                return day;
+                return parseInt(day);
             }
         }
 
@@ -168,7 +168,7 @@
             eraseCookie('dayType');
             if(dayStarted()) {
                 notify(0);
-                setCookie('dayType', 0, 1);
+                setCookie('dayType', '0', 1);
                 wDay(0);
             }
             else notify(2);
@@ -179,7 +179,7 @@
             eraseCookie('dayType');
             if(dayStarted()) {
                 notify(1);
-                setCookie('dayType', 1, 1);
+                setCookie('dayType', '1', 1);
                 wDay(1);
             }
             else notify(2);

@@ -239,6 +239,8 @@
                     ctime.sec == 0 ? 0 : 60 - ctime.sec
                 );
 
+                timeLeft.min = (timeLeft.min < 0) ? 60 - ctime.min + eoptime.min : (eoptime.hr > ctime.hr ? 60 - ctime.min + eoptime.min : timeLeft.min);
+
                 var tabString = (timeLeft.min < 10 ? '0' : '') + timeLeft.min + ':' +
                                 (timeLeft.sec < 10 ? '0' : '') + timeLeft.sec;
 
@@ -310,8 +312,8 @@
         }
 
         function CTimeFromNum(num) {
-            var m = num * 100 % 100;
-            var h = num - (m / 100);
+            var m = Math.round(num * 100) % 100;
+            var h = num - m / 100;
             return new CTime(h, m);
         }
 

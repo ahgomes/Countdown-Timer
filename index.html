@@ -149,8 +149,9 @@
         };
 
         function dayStarted() {
-            var ctime = new CTime(new Date());
-            return ctime.toNum() >= 7.45 && ctime.toNum() <= 14.49;
+            let d = new Date()
+            var ctime = new CTime(d);
+            return d.getDay() != 0 && d.getDay() != 6 && ctime.toNum() >= 7.45 && ctime.toNum() <= 14.49;
         }
 
         function notify(n) {

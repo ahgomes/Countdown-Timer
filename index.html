@@ -400,7 +400,7 @@
                 );
 
                 timeLeft.min = (timeLeft.min < 0) ?
-                    60 - ctime.min + period.eop.min :
+                    60 - ctime.min + period.eop.min - 1:
                     (period.eop.hr > ctime.hr ? 60 - ctime.min + period.eop.min : timeLeft.min);
 
                 var tabString = (timeLeft.min < 10 ? '0' : '') + timeLeft.min + ':' +

@@ -447,19 +447,24 @@
         }
 
         function toggleBeta() {
+            var beta = document.querySelector('.beta');
             var box = document.querySelector('.betaBox').style;
             var back = document.querySelector('.betaBack').style;
             if(betaOpen) {
                 box.opacity = '0';
+                beta.removeAttribute('style');
                 setTimeout(function() { box.display = 'none'; back.display = 'none'; }, 150);
                 betaOpen = false;
             } else {
                 box.display = 'block';
                 back.display = 'block';
-                setTimeout(function() { box.opacity = '1'; }, 10);
+                setTimeout(function() {
+                    box.opacity = '1';
+                    beta.style.color = '#54A4FF';
+                    beta.style.borderColor = '#54A4FF';
+                }, 10);
                 betaOpen = true;
             }
-
         }
 
     </script>

@@ -209,11 +209,31 @@
             left: calc(50% - 60px);
             width: 120px;
             font-size: 15px;
-            font-weight: 300;
+            font-weight: 400;
             text-align: center;
             color: #D0D1D5;
             text-decoration: none;
+            transition: all 500ms ease;
             z-index: -1;
+        }
+
+        .footer a::after {
+            content: '';
+            display: block;
+            margin-left: 55px;
+            height: 2px;
+            width: 0;
+            background: #3C454E;
+            transition: all 500ms ease;
+        }
+
+        .footer a:hover::after {
+            margin-left: 5px;
+            width: 110px;
+        }
+
+        .footer a:hover {
+            color: #3C454E;
         }
 
         .displayTime {

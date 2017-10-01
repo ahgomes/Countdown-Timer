@@ -10,7 +10,7 @@ body {
 
 .h1 h1 {
     text-align: center;
-    color: #182737;
+    //color: #182737;
     font-weight: 400;
     font-size: 85px;
     margin-top: 170px;
@@ -59,49 +59,77 @@ body {
     width: 1190px;
 }
 
-.btnB, .btnE {
+.btnB, .btnE, .btnH, .btnD {
     flex: 1;
-    height: 85px;
+    background: #f1f1f1;
     text-align: center;
-    background: #54A4FF;
-    color: #FBFCFC;
-    font-size: 42.5px;
-    line-height: 85px;
-    border-radius: 5.1px;
+    padding: 36px;
+    border-radius: 5px;
     z-index: 2;
-    transition: all 550ms ease;
+    transition: all 500ms ease;
     cursor: pointer;
 }
 
-.btnB:hover, .btnE:hover {
-    background: #2F7FF7;
-    box-shadow: 8.5px 8.5px 51px #8dcdf4;
+.btnB i, .btnE i, .btnH i, .btnD i {
+    display: block;
+    color: #999fa4;
+    font-size: 48px;
 }
 
-.btnB:active, .btnE:active {
-    background: #1C73D4;
+.btnB b, .btnE b, .btnH b, .btnD b {
+    color: #2a333c;
+    font-size: 36px;
 }
 
 .btnB {
-    margin-right: 17px;
+    background: #fff;
+    box-shadow: 0 7px 14px rgba(0,0,0,0.1), 0 5px 5px rgba(0,0,0,0.02);
+}
+
+.btnB i {
+    color: #0ba6fb;
+}
+
+.btnB b {
+    color: #000;
+}
+
+.btnB:hover, .btnE:hover, .btnH:hover, .btnD:hover {
+    background: #fff;
+    box-shadow: 0 7px 14px rgba(0,0,0,0.1), 0 5px 5px rgba(0,0,0,0.02);
+}
+
+.btnB {
+    margin-right: 10px;
 }
 
 .btnE {
-    margin-left: 17px;
+    margin: 0 10px;
+}
+
+.btnH {
+    margin: 0 10px;
+}
+
+.btnD {
+    margin-left: 10px;
 }
 
 .notify {
     position: fixed;
-    left: calc(50% - 142.5px);
-    bottom: -68px;
-    background: #2d2d2d;
-    color: #fff;
+    right: -500px;
+    bottom: 24px;
+    background: #fff;
+    box-shadow: 0 7px 14px rgba(0,0,0,0.15), 0 5px 5px rgba(0,0,0,0.08);
+    color: #000;
     font-size: 15.3px;
-    padding: 17px 0;
-    border-radius: 2.55px;
+    padding: 17px 0 17px 17px;
+    border-top-right-radius: 2.55px;
+    border-bottom-right-radius: 2.55px;
+    border-left: 4px solid #000;
     width: 285px;
-    text-align: center;
-    transition: bottom 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: right 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 10000;
 }
 
 .beta {
@@ -124,8 +152,8 @@ body {
 }
 
 .beta:hover {
-    color: #54A4FF;
-    border-color: #54A4FF;
+    color: #0ba6fb;
+    border-color: #0ba6fb;
 }
 
 .betaBox {
@@ -136,10 +164,10 @@ body {
     height: 90px;
     width: 240px;
     border-radius: 3px;
-    background: #0987E0;
-    color: #FBFCFC;
-    padding: 10px 30px 25px 30px;
-    box-shadow: 1.5px 1.5px 20px #8dcdf4;
+    background: #0ba6fb;
+    color: #fff;
+    padding: 15px 30px 25px 30px;
+    box-shadow: 0 7px 14px rgba(0,0,0,0.1), 0 5px 5px rgba(0,0,0,0.02);
     opacity: 0;
     transition: opacity 300ms ease;
     z-index: 2;
@@ -155,19 +183,25 @@ body {
     width: 0px;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    border-left: 15px solid #0987E0;
+    border-left: 15px solid #0ba6fb;
 }
 
 .betaLink {
     margin-top: 15px;
-    color: #0987E0;
-    background: #FAFCFD;
-    border: 2px solid #FAFCFD;
+    background: #0ba6fb;
+    color: #fff;
+    border: 2px solid #fff;
     height: 40px;
     width: 178.115px;
     padding-left: 61.845px;
     border-radius: 3px;
     cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.betaLink:hover {
+    background: #fff;
+    color: #0ba6fb;
 }
 
 .betaLinkTitle {
@@ -197,7 +231,8 @@ body {
     width: 100%;
     height: 40px;
     text-align: center;
-    color: #D0D1D5;
+    background: #0ba6fb;
+    color: #fff;
     z-index: -1;
 }
 
@@ -208,32 +243,12 @@ body {
     text-align: center;
     text-decoration: none;
     line-height: 40px;
-    color: #c2c3c6;
-    transition: all 500ms ease;
-}
-
-.footer a::after {
-    content: '';
-    display: block;
-    margin-top: -10px;
-    margin-left: 50%;
-    height: 2px;
-    width: 0;
-    background: #3C454E;
-    transition: all 500ms ease;
-}
-
-.footer a:hover::after {
-    margin-left: 0;
-    width: 100%;
+    color: #fff;
+    transition: all 200ms ease;
 }
 
 .footer a:hover {
-    color: #3C454E;
-}
-
-.footer b {
-    margin: 0 5px;
+    color: #000;
 }
 
 .displayTime {

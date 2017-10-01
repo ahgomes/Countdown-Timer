@@ -5,9 +5,9 @@ var x;
 var title = document.querySelector('title');
 var betaOpen = false;
 
-function setCookie(cname,cvalue, exdays) {
+function setCookie(cname,cvalue, exhrs) {
     var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    d.setTime(d.getTime() + (exhrs * 60 * 60 * 1000));
     var expires = 'expires=' + d.toGMTString();
     document.cookie = cname + '=' + cvalue + '; ' + expires;
 }
@@ -46,10 +46,10 @@ document.querySelector('.btnB').onclick = function(){
     eraseCookie('dayType');
     if(dayStarted()) {
         notify(0);
-        setCookie('dayType', '0', 1);
+        setCookie('dayType', '0', 7);
         wDay(0);
     }
-    else notify(2);
+    else notify(9);
 };
 
 document.querySelector('.btnE').onclick = function(){
@@ -58,10 +58,18 @@ document.querySelector('.btnE').onclick = function(){
     eraseCookie('dayType');
     if(dayStarted()) {
         notify(1);
-        setCookie('dayType', '1', 1);
+        setCookie('dayType', '1', 7);
         wDay(1);
     }
-    else notify(2);
+    else notify(9);
+};
+
+document.querySelector('.btnH').onclick = function(){
+    notify(3);
+};
+
+document.querySelector('.btnD').onclick = function(){
+    notify(3);
 };
 
 function dayStarted() {
@@ -80,15 +88,18 @@ function notify(n) {
         case 1:
             noteBox.innerHTML = 'Timer has been set to E-Day';
             break;
-        case 2:
+        case 3:
+            noteBox.innerHTML = 'Not Setup yet';
+            break;
+        case 9:
             noteBox.innerHTML = 'Sorry, School is not open right now';
             break;
         default:
     }
 
-    noteBox.style.bottom = '40px';
+    noteBox.style.right = '24px';
     window.setTimeout(function(){
-        noteBox.style.bottom = '-68px';
+        noteBox.style.right = '-500px';
     }, 3000);
 }
 
@@ -210,9 +221,9 @@ function toggleBeta() {
         back.display = 'block';
         setTimeout(function() {
             box.opacity = '1';
-            beta.style.color = '#54A4FF';
-            beta.style.borderColor = '#54A4FF';
-        }, 10);
+            beta.style.color = '#0ba6fb';
+            beta.style.borderColor = '#0ba6fb';
+        }, 50);
         betaOpen = true;
     }
 }

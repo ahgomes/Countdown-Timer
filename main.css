@@ -55,11 +55,11 @@ body {
 .btn {
     display: flex;
     position: absolute;
-    left: calc(50% - 595px);
-    width: 1190px;
+    left: calc(50% - 605px);
+    width: 1210px;
 }
 
-.btnB, .btnE, .btnH, .btnD {
+.btn > * {
     flex: 1;
     background: #f1f1f1;
     text-align: center;
@@ -68,38 +68,45 @@ body {
     z-index: 2;
     transition: all 500ms ease;
     cursor: pointer;
+    margin: 0 10px;
 }
 
-.btnB i, .btnE i, .btnH i, .btnD i {
+.btn i {
     display: block;
-    color: #999fa4;
     font-size: 48px;
 }
 
-.btnB b, .btnE b, .btnH b, .btnD b {
-    color: #2a333c;
+.btn b {
     font-size: 36px;
 }
 
-.btnB {
+.btn .inactive i {
+    color: #999fa4;
+}
+
+.btn .inactive b {
+    color: #2a333c;
+}
+
+.btn .active {
     background: #fff;
     box-shadow: 0 7px 14px rgba(0,0,0,0.1), 0 5px 5px rgba(0,0,0,0.02);
 }
 
-.btnB i {
+.btn .active i {
     color: #0ba6fb;
 }
 
-.btnB b {
+.btn .active b {
     color: #000;
 }
 
-.btnB:hover, .btnE:hover, .btnH:hover, .btnD:hover {
+.btn .inactive:hover {
     background: #fff;
     box-shadow: 0 7px 14px rgba(0,0,0,0.1), 0 5px 5px rgba(0,0,0,0.02);
 }
 
-.btnB {
+/*.btnB {
     margin-right: 10px;
 }
 
@@ -113,7 +120,7 @@ body {
 
 .btnD {
     margin-left: 10px;
-}
+}*/
 
 .notify {
     position: fixed;

@@ -40,13 +40,19 @@ function eraseCookie(name) {
 
 
 window.load = dayStarted() ?  wDay(checkCookie()) : title.innerHTML = 'School isn\'t open rn';
+
+function switchDay(x) {
+
+}
+
 document.querySelector('.btnB').onclick = function(){
     if(betaOpen) toggleBeta();
     clearInterval(x);
     eraseCookie('dayType');
+    setCookie('dayType', 0, 7);
     if(dayStarted()) {
         notify(0);
-        setCookie('dayType', '0', 7);
+        setCookie('dayType', 0, 7);
         wDay(0);
     }
     else notify(9);

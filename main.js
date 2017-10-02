@@ -4,6 +4,7 @@ var date;
 var x;
 var title = document.querySelector('title');
 var betaOpen = false;
+var buttons = ['.btnB', '.btnE', '.btnH', '.btnD'];
 
 function setCookie(cname,cvalue, exhrs) {
     var d = new Date();
@@ -38,36 +39,43 @@ function eraseCookie(name) {
     setCookie(name, '', -1);
 }
 
+window.load = dayStarted() ?  switchDay(checkCookie()) : title.innerHTML = 'School isn\'t open rn';
 
-window.load = dayStarted() ?  wDay(checkCookie()) : title.innerHTML = 'School isn\'t open rn';
+function switchDay(y) {
+    if(betaOpen) toggleBeta();
+    clearInterval(x);
+    eraseCookie('dayType');
+    if(dayStarted()) {
+        buttonActivate(y);
+        notify(y);
+        setCookie('dayType', y, 7);
+        wDay(y);
+    }
+    else notify(9);
+}
 
-function switchDay(x) {
+function buttonActivate(g) {
+    for (let i = 0; i < buttons.length; i++) {
+        let b = document.querySelector(buttons[i]);
+        if(i == g) {
+            document.querySelector(buttons[i] + ' i').innerHTML = '&#xE425';
+            b.classList.remove('inactive');
+            b.classList.add('active');
+        } else {
+            document.querySelector(buttons[i] + ' i').innerHTML = '&#xE426';
+            b.classList.remove('active');
+            b.classList.add('inactive');
+        }
+    }
 
 }
 
 document.querySelector('.btnB').onclick = function(){
-    if(betaOpen) toggleBeta();
-    clearInterval(x);
-    eraseCookie('dayType');
-    setCookie('dayType', 0, 7);
-    if(dayStarted()) {
-        notify(0);
-        setCookie('dayType', 0, 7);
-        wDay(0);
-    }
-    else notify(9);
+    switchDay(0);
 };
 
 document.querySelector('.btnE').onclick = function(){
-    if(betaOpen) toggleBeta();
-    clearInterval(x);
-    eraseCookie('dayType');
-    if(dayStarted()) {
-        notify(1);
-        setCookie('dayType', '1', 7);
-        wDay(1);
-    }
-    else notify(9);
+    switchDay(1);
 };
 
 document.querySelector('.btnH').onclick = function(){

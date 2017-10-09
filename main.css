@@ -28,6 +28,7 @@ body {
     line-height: 100vh;
     background: #ddd;
     z-index: 99999;
+    cursor: progress;
     transition: all 1000ms;
 }
 
@@ -61,6 +62,50 @@ body {
 
 .pplCLR {
     color: var(--ppl_mode);
+}
+
+.rnbwBG {
+    background: var(--ylw_mode);
+}
+
+.rnbwCLR {
+    color: var(--ylw_mode);
+}
+
+@keyframes bgBlend {
+    0% {
+        background: var(--ylw_mode);
+    }
+    25% {
+        background: var(--red_mode);
+    }
+    50% {
+        background: var(--ppl_mode);
+    }
+    75% {
+        background: var(--blue_mode);
+    }
+    100% {
+        background: var(--ylw_mode);
+    }
+}
+
+@keyframes clrBlend {
+    0% {
+        color: var(--ylw_mode);
+    }
+    25% {
+        color: var(--red_mode);
+    }
+    50% {
+        color: var(--ppl_mode);
+    }
+    75% {
+        color: var(--blue_mode);
+    }
+    100% {
+        color: var(--ylw_mode);
+    }
 }
 
 .h1 h1 {
@@ -102,7 +147,7 @@ body {
     width: 0;
     height: 7px;
     border-radius: 7px;
-    transition: all 400ms;
+    transition: width 400ms, background 1000ms;
 }
 
 .btn {
@@ -230,8 +275,13 @@ table {
     max-height: 90px;
 }
 
+#light i {
+     transition: all 300ms;
+}
+
 #dark i {
      opacity: 0;
+     transition: all 300ms;
 }
 
 #color i {
@@ -292,6 +342,11 @@ table {
     color: #fff;
 }
 
+.colorBox #rnbw {
+    background: linear-gradient(to right, var(--ylw_mode), var(--red_mode), var(--blue_mode));
+    color: #fff;
+}
+
 .colorBack {
     display: none;
     position: absolute;
@@ -310,7 +365,7 @@ table {
     height: 40px;
     text-align: center;
     color: #fff;
-    z-index: -1;
+    z-index: 2;
     transition: all 1000ms ease;
 }
 
@@ -322,6 +377,7 @@ table {
     text-decoration: none;
     line-height: 40px;
     color: #fff;
+    cursor: pointer !important;
     transition: all 200ms ease;
 }
 
@@ -329,9 +385,16 @@ table {
     color: #000;
 }
 
-#betaLink {
+#offset, #betaLink {
     position: absolute;
     display: inline-block;
+}
+
+#offset {
+    left: 30px;
+}
+
+#betaLink {
     right: 30px;
 }
 
@@ -345,4 +408,5 @@ table {
     line-height: 60px;
     text-align: center;
     font-weight: 100;
+    transition: color 1000ms;
 }

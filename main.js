@@ -3,13 +3,19 @@
 var date;
 var x;
 var title = document.querySelector('title');
-var buttons = ['.btnB', '.btnE', '.btnH', '.btnD'];
+var buttons = ['.btnB', '.btnE', '.btnH', '.btnF'];
 var btnActive;
 var clrPkrOpen = false;
-var clrs = ['blue', 'red', 'ylw', 'ppl'];
+var clrs = ['blue', 'red', 'ylw', 'ppl', 'rnbw'];
 var clr = 0;
 var clrChg = [['.jz', 'BG'], ['.footer', 'BG'], ['.displayTime', 'CLR']];
 var darkMode = true;
+var timeOffSet = 0;
+var animatedClrRule = document.createElement('style');
+animatedClrRule.innerHTML = (
+    '.rnbwBG {\n\tanimation: bgBlend 60000ms infinite;\n}\n' +
+    '.rnbwCLR {\n\tanimation: clrBlend 60000ms infinite;\n}'
+);
 
 
 function setCookie(cname,cvalue, exhrs) {
@@ -64,7 +70,6 @@ window.onload = function() {
         darkMode = !checkDarkCookie();
         toggleDarkMode();
     }
-    console.log(document.cookie);
     switchClr(checkClrCookie());
     if(dayStarted()) {
         switchDay(checkDayCookie());
@@ -90,30 +95,6 @@ function switchDay(y) {
         wDay(y);
     }
     else notify(9);
-}
-
-function switchClr(c) {
-    for (let i of buttons) {
-        document.querySelector(i).classList.remove(clrs[clr] + 'CLR');
-        document.querySelector(i).classList.add(clrs[c] + 'CLR');
-    }
-
-    for (let i = 0; i < clrChg.length; i++) {
-        document.querySelector(clrChg[i][0]).classList.remove(clrs[clr] + clrChg[i][1]);
-        document.querySelector(clrChg[i][0]).classList.add(clrs[c] + clrChg[i][1]);
-    }
-
-    document.querySelector('#' + clrs[c]).classList.add('check');
-    document.querySelector('#' + clrs[clr]).classList.remove('check');
-
-    clr = c;
-    setCookie('clr', clr, 10 * 24 * 365);
-}
-
-function toggleDarkMode() {
-    document.querySelector('#darkCSSTag').disabled = darkMode;
-    darkMode = !darkMode;
-    setCookie('dark', darkMode, 10 * 24 * 365);
 }
 
 function buttonActivate(o, n) {
@@ -144,18 +125,12 @@ document.querySelector('.btnE').onclick = function(){
 };
 
 document.querySelector('.btnH').onclick = function(){
-    notify(3);
+    switchDay(2);
 };
 
-document.querySelector('.btnD').onclick = function(){
+document.querySelector('.btnF').onclick = function(){
     notify(3);
 };
-
-function dayStarted() {
-    let d = new Date()
-    var ctime = new CTime(d);
-    return d.getDay() != 0 && d.getDay() != 6 && ctime.toNum() >= 7.45 && ctime.toNum() <= 14.49;
-}
 
 function notify(n) {
     var noteBox = document.querySelector('.notify');
@@ -182,6 +157,13 @@ function notify(n) {
     }, 3000);
 }
 
+function dayStarted() {
+    let d = new Date();
+    var ctime = new CTime(d);
+    //return d.getDay() != 0 && d.getDay() != 6 && ctime.toNum() >= 7.45 && ctime.toNum() <= 14.49;
+    return ctime.toNum() >= 7.45 && ctime.toNum() <= 14.49;
+}
+
 function wDay(daytype) {
     var day = {};
     var block = {
@@ -198,12 +180,22 @@ function wDay(daytype) {
                 'Lunch', '', 'Bell', '', 'Bell', '', 'Bell', '']
     }
 
+    var half = {
+        bells: [7.45, 8.15, 8.18, 8.48, 8.51, 9.21, 9.24, 9.54, 9.57, 10.27,
+                10.30, 11.00, 11.03, 11.33, 11.36, 12.06],
+        types: ['', 'Bell', '', 'Bell', '', 'Bell', '', 'Bell',
+                '', 'Bell', '', 'Bell', '', 'Bell', '']
+    }
+
     switch(daytype) {
         case 0:
             day = block;
             break;
         case 1:
             day = eday;
+            break;
+        case 2:
+            day = half;
             break;
         default:
             day = block;
@@ -216,7 +208,7 @@ function wDay(daytype) {
         var timeLeft = new CTime(
             0,
             period.eop.min - ctime.min - (ctime.sec == 0 ? 0 : 1),
-            ctime.sec == 0 ? 0 : 60 - ctime.sec
+            (ctime.sec == 0) ? 0 : 60 - ctime.sec
         );
 
         timeLeft.min = (timeLeft.min < 0) ?
@@ -233,18 +225,15 @@ function wDay(daytype) {
 
         document.querySelector('.jz').style.width = barLength + 'px';
 
-        if(period.eop == null && h > 12) {
+        if(period.eop == null) {
             title.innerHTML = 'School is Over';
-        } else if(period.eop == null && h < 12) {
-            title.innerHTML = 'School hasn\'t started';
         } else {
             title.innerHTML = period.type + ' ' + tabString;
             document.querySelector('.displayTime').innerHTML = '<strong>' + period.type + '</strong>' + ' ' + tabString;
         }
 
         if (timeLeft.min == 0 && timeLeft.sec == 0) {
-            clearInterval(x);
-            wDay(daytype);
+            period = wPer(day);
         }
     }, 1000);
 }
@@ -286,6 +275,7 @@ function CTimeFromNum(num) {
     return new CTime(h, m);
 }
 
+//Colors
 function toggleColor() {
     var clrPkr = document.querySelector('.colorPicker');
     var box = document.querySelector('.colorBox').style;
@@ -304,4 +294,38 @@ function toggleColor() {
         }, 50);
         clrPkrOpen = true;
     }
+}
+
+function switchClr(c) {
+    if(c != clr) {
+        animatedClrRule.remove();
+
+        for (let i of buttons) {
+            document.querySelector(i).classList.remove(clrs[clr] + 'CLR');
+            document.querySelector(i).classList.add(clrs[c] + 'CLR');
+        }
+
+        for (let i = 0; i < clrChg.length; i++) {
+            document.querySelector(clrChg[i][0]).classList.remove(clrs[clr] + clrChg[i][1]);
+            document.querySelector(clrChg[i][0]).classList.add(clrs[c] + clrChg[i][1]);
+        }
+
+        document.querySelector('#' + clrs[c]).classList.add('check');
+        document.querySelector('#' + clrs[clr]).classList.remove('check');
+
+        clr = c;
+        setCookie('clr', clr, 10 * 24 * 365);
+    }
+
+    if(clr == 4) {
+        window.setTimeout(function() {
+            document.querySelector('head').appendChild(animatedClrRule);
+        }, 1000);
+    }
+}
+
+function toggleDarkMode() {
+    document.querySelector('#darkCSSTag').disabled = darkMode;
+    darkMode = !darkMode;
+    setCookie('dark', darkMode, 10 * 24 * 365);
 }

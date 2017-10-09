@@ -1,0 +1,74 @@
+body {
+    background: #000;
+}
+
+.h1 h1 {
+    color: #fff;
+}
+
+.h1 h1::before {
+    background: #333;
+    color: #f4f4f4;
+}
+
+.h1::after {
+    background: #2d2d2d;
+}
+
+.btn > * {
+    background: #282828;
+    border: 3px solid #000;
+}
+
+.btn .inactive i {
+    color: #939393;
+}
+
+.btn .inactive b {
+    color: #acacac;
+}
+
+.btn .active {
+    box-sizing: border-box;
+    background: #000;
+    border: 3px solid #fff;
+    box-shadow: none;
+}
+
+.btn .active b {
+    color: #fff;
+}
+
+.btn .inactive:hover {
+    background: #000;
+    border: 3px solid #fff;
+    box-shadow: none;
+}
+
+.colorPicker {
+    color: #4a4a4a;
+}
+
+.colorPicker:hover {
+    color: #eee;
+}
+
+.colorBox {
+    background: #444;
+}
+
+.colorBox::before {
+    border-left: 15px solid #444;
+}
+
+#mode {
+    background: #333;
+}
+
+#light i {
+     opacity: 0;
+}
+
+#dark i {
+     opacity: 1;
+}

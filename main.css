@@ -1,5 +1,15 @@
 * {
     margin: 0;
+    padding: 0;
+}
+
+:root {
+    --blue_mode: #0ba6fb;
+    --red_mode: #fb0b0b;
+    --ylw_mode: #fbd50b;
+    --ppl_mode: #750bfb;
+    --block-color: #fff;
+    --feild-color: #fff;
 }
 
 body {
@@ -8,9 +18,53 @@ body {
     overflow: hidden;
 }
 
+.load {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    line-height: 100vh;
+    background: #ddd;
+    z-index: 99999;
+    transition: all 1000ms;
+}
+
+.blueBG {
+    background: var(--blue_mode);
+}
+
+.blueCLR {
+    color: var(--blue_mode);
+}
+
+.redBG {
+    background: var(--red_mode);
+}
+
+.redCLR {
+    color: var(--red_mode);
+}
+
+.ylwBG {
+    background: var(--ylw_mode);
+}
+
+.ylwCLR {
+    color: var(--ylw_mode);
+}
+
+.pplBG {
+    background: var(--ppl_mode);
+}
+
+.pplCLR {
+    color: var(--ppl_mode);
+}
+
 .h1 h1 {
     text-align: center;
-    //color: #182737;
     font-weight: 400;
     font-size: 85px;
     margin-top: 170px;
@@ -35,21 +89,20 @@ body {
     position: absolute;
     left: calc(50% - 595px);
     width: 1190px;
-    height: 6.8px;
-    border-radius: 6.8px;
+    height: 7px;
+    border-radius: 7px;
     background: #f4f4f4;
 }
 
 .jz {
     position: absolute;
-    top: 272px;
+    top: 273px;
     left: calc(50% - 595px);
     max-width: 1190px;
     width: 0;
-    height: 6.8px;
-    border-radius: 6.8px;
-    background: #0ba6fb;
-    transition: width 400ms;
+    height: 7px;
+    border-radius: 7px;
+    transition: all 400ms;
 }
 
 .btn {
@@ -93,10 +146,6 @@ body {
     box-shadow: 0 7px 14px rgba(0,0,0,0.1), 0 5px 5px rgba(0,0,0,0.02);
 }
 
-.btn .active i {
-    color: #0ba6fb;
-}
-
 .btn .active b {
     color: #000;
 }
@@ -105,22 +154,6 @@ body {
     background: #fff;
     box-shadow: 0 7px 14px rgba(0,0,0,0.1), 0 5px 5px rgba(0,0,0,0.02);
 }
-
-/*.btnB {
-    margin-right: 10px;
-}
-
-.btnE {
-    margin: 0 10px;
-}
-
-.btnH {
-    margin: 0 10px;
-}
-
-.btnD {
-    margin-left: 10px;
-}*/
 
 .notify {
     position: fixed;
@@ -139,48 +172,41 @@ body {
     z-index: 10000;
 }
 
-.beta {
+.colorPicker {
     position: absolute;
     top: 60px;
     right: 60px;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    line-height: 35px;
-    font-size: 30px;
     color: #E1DFEB;
-    font-weight: 300;
-    border-radius: 50%;
-    border: 2px solid #E1DFEB;
-    padding: 2px;
-    transition: all 400ms ease;
+    transition: all 300ms ease;
     cursor: pointer;
     z-index: 2;
 }
 
-.beta:hover {
-    color: #0ba6fb;
-    border-color: #0ba6fb;
+.colorPicker i {
+    font-size: 36px;
 }
 
-.betaBox {
+.colorPicker:hover {
+    color: #bbb;
+}
+
+.colorBox {
     display: none;
     position: absolute;
-    top: 20px;
-    right: 110px;
+    top: 30px;
+    right: 120px;
     height: 90px;
-    width: 240px;
+    max-height: 90px;
+    width: 140px;
+    max-width: 140px;
     border-radius: 3px;
-    background: #0ba6fb;
-    color: #fff;
-    padding: 15px 30px 25px 30px;
-    box-shadow: 0 7px 14px rgba(0,0,0,0.1), 0 5px 5px rgba(0,0,0,0.02);
+    background: #f1f1f1;
     opacity: 0;
     transition: opacity 300ms ease;
     z-index: 2;
 }
 
-.betaBox::before {
+.colorBox::before {
     content: '';
     position: absolute;
     display: block;
@@ -190,38 +216,83 @@ body {
     width: 0px;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    border-left: 15px solid #0ba6fb;
+    border-left: 15px solid #f1f1f1;
 }
 
-.betaLink {
-    margin-top: 15px;
-    background: #0ba6fb;
-    color: #fff;
-    border: 2px solid #fff;
-    height: 40px;
-    width: 178.115px;
-    padding-left: 61.845px;
+table {
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+#mode {
+    float: left;
+    background: #e1e1e1;
+    max-height: 90px;
+}
+
+#dark i {
+     opacity: 0;
+}
+
+#color i {
+    opacity: 0;
+    transition: all 300ms;
+}
+
+#color .check i {
+    opacity: 1;
+}
+
+#color {
+    float: right;
+}
+
+.colorBox tr td div {
+    max-height: 24px;
+}
+
+.colorBox td {
+    box-sizing: border-box;
+    width: 30px;
+    max-width: 30px;
+    height: 30px;
+    max-height: 30px;
     border-radius: 3px;
+    padding: 3px;
     cursor: pointer;
-    transition: all 300ms ease;
+    overflow: hidden;
 }
 
-.betaLink:hover {
+.colorBox #light {
     background: #fff;
-    color: #0ba6fb;
+    color: #000;
 }
 
-.betaLinkTitle {
-    font-style: normal;
-    vertical-align: top;
-    -webkit-font-smoothing: antialiased;
+.colorBox #dark {
+    background: #000;
+    color: #fff;
 }
 
-.betaLink i {
-    line-height: 40px !important;
+.colorBox #blue {
+    background: var(--blue_mode);
+    color: #000;
 }
 
-.betaBack {
+.colorBox #red {
+    background: var(--red_mode);
+    color: #fff;
+}
+
+.colorBox #ylw {
+    background: var(--ylw_mode);
+}
+
+.colorBox #ppl {
+    background: var(--ppl_mode);
+    color: #fff;
+}
+
+.colorBack {
     display: none;
     position: absolute;
     top: 0;
@@ -238,9 +309,9 @@ body {
     width: 100%;
     height: 40px;
     text-align: center;
-    background: #0ba6fb;
     color: #fff;
     z-index: -1;
+    transition: all 1000ms ease;
 }
 
 .footer a {
@@ -258,6 +329,12 @@ body {
     color: #000;
 }
 
+#betaLink {
+    position: absolute;
+    display: inline-block;
+    right: 30px;
+}
+
 .displayTime {
     position: absolute;
     top: 40px;
@@ -267,4 +344,5 @@ body {
     font-size: 35px;
     line-height: 60px;
     text-align: center;
+    font-weight: 100;
 }

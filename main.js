@@ -74,8 +74,7 @@ window.onload = function() {
     if(dayStarted()) {
         switchDay(checkDayCookie());
     } else {
-        //title.innerHTML = 'School isn\'t open rn';
-        title.innerHTML = 'PSAT';
+        title.innerHTML = 'School isn\'t open rn';
     }
     setTimeout(function() {
         document.querySelector('.load').style.opacity = '0';
@@ -130,7 +129,7 @@ document.querySelector('.btnH').onclick = function(){
 };
 
 document.querySelector('.btnF').onclick = function(){
-    switchDay(3);
+    notify(3);
 };
 
 function notify(n) {
@@ -162,8 +161,7 @@ function dayStarted() {
     let d = new Date();
     var ctime = new CTime(d);
     //return d.getDay() != 0 && d.getDay() != 6 && ctime.toNum() >= 7.45 && ctime.toNum() <= 14.49;
-    //return ctime.toNum() >= 7.45 && ctime.toNum() <= 14.49;
-    return ctime.toNum() >= 11 && ctime.toNum() <= 14.49;
+    return ctime.toNum() >= 7.45 && ctime.toNum() <= 14.49;
 }
 
 function wDay(daytype) {
@@ -189,10 +187,10 @@ function wDay(daytype) {
                 '', 'Bell', '', 'Bell', '', 'Bell', '']
     }
 
-    var psat = {
+    /*var psat = {
         bells: [11.00, 12.00, 12.39, 12.43, 1.22, 1.26, 2.05, 2.09, 2.49],
         types: ['Lunch', '', 'Bell', '', 'Bell', '', 'Bell', '']
-    }
+    }*/
 
     switch(daytype) {
         case 0:
@@ -203,9 +201,6 @@ function wDay(daytype) {
             break;
         case 2:
             day = half;
-            break;
-        case 3:
-            day = psat;
             break;
         default:
             day = block;
